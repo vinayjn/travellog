@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import './App.css';
-
+import { LazyLoadImage, trackWindowScroll } from 'react-lazy-load-image-component';
 class App extends Component {
 
   constructor(props) {
@@ -36,8 +36,16 @@ class App extends Component {
               <span className="locationName">{group.name}</span> 
               <span className="locationDate"> {group.date} </span>
               </div>            
-            {group.images.map((image, imageIndex) => (
-              <img src={"./data/" + image.files['1x']} width={image.size.width+ "px"} height={image.size.height+ "px"} />
+            {group.images.map((image, imageIndex) => (              
+              <div>
+              <LazyLoadImage
+                effect="opacity"
+                delayTime="10000"
+                alt={image.alt}
+                height={image.height}
+                src={"./data/" + image.files['1x']} // use normal <img> attributes as props
+                width={image.width} />                                                  
+                </div>
             ))}
             </div>
           ))}            
